@@ -1,50 +1,81 @@
 # [PROJECT_NAME] Constitution
+<!--
+Sync Impact Report
+- Version change: N/A → 1.0.0
+- Modified principles: None (initial definition)
+- Added sections: Core Principles, API Scope & Behavior, Development Workflow & Quality Gates, Governance
+- Removed sections: None
+- Templates requiring updates: .specify/templates/plan-template.md ✅ updated, .specify/templates/spec-template.md ✅ updated, .specify/templates/tasks-template.md ✅ updated (command templates directory not present)
+- Follow-up TODOs: None
+-->
+
+# Address Validator API Constitution
 <!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Accuracy & Postal Reliability
+The API MUST prioritize data correctness over convenience: parse, normalize, and validate US
+addresses against authoritative postal standards (e.g., USPS formats and state/ZIP integrity).
+Normalization must output discrete fields (street, number, city, state, zip_code) with consistent
+capitalization and abbreviations. Corrections are permitted only when backed by deterministic rules
+or authoritative references; unverifiable data MUST be marked instead of guessed.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Graceful Degradation & Transparency
+The service MUST never fail abruptly. For any partial, misspelled, or ambiguous address, return the
+most useful structured output possible with explicit null/unknown markers, while keeping formatting
+consistent. Every response MUST include `validation_status` (valid, corrected, unverifiable) plus a
+confidence indicator and the reason or evidence behind the decision, highlighting any corrections
+made to the input.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Security & Abuse Prevention
+All inputs MUST be sanitized and validated to prevent injection, path traversal, or payload abuse.
+Reject or throttle malicious or excessive requests; enforce rate limiting and strict timeouts to
+maintain availability. Never expose stack traces or internal error details externally; log securely
+with minimal sensitive data. Dependencies, API keys, and data sources MUST follow least-privilege,
+pinning, and rotation policies.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Scalability, Extensibility & Performance
+Architect for high concurrency and low latency for single-request flows; prefer stateless handlers,
+efficient I/O, and caching where correctness is preserved. The `/validate-address` contract is
+stable; new countries or data providers MUST be pluggable via modular interfaces without breaking
+existing behavior. Track and meet performance budgets (e.g., sub-200ms p95 for typical requests
+under expected load) and document any variance with remediation plans.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Testability, Documentation & Maintainability
+Unit and integration tests MUST cover parsing, normalization, validation edge cases, ambiguity
+handling, and error paths. Contract tests MUST guard the `/validate-address` response schema and
+status semantics. Maintain an up-to-date OpenAPI specification and concise comments for non-obvious
+algorithms or normalization rules. Internal logic, naming, and conventions MUST stay consistent with
+this constitution to reduce maintenance risk.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## API Scope & Behavior
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Expose a single endpoint `POST /validate-address` accepting a free-form US address. Responses MUST
+return a structured JSON object containing `street`, `number`, `city`, `state`, `zip_code`,
+`validation_status`, `confidence`, and `reason` fields. Handle partial, misspelled, or ambiguous
+inputs gracefully by returning best-effort structured data with clear uncertainty markers and by
+explicitly noting any corrections applied. Error responses MUST omit stack traces and sensitive
+details while remaining actionable.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow & Quality Gates
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Design changes to parsing, normalization, or data providers MUST include regression tests and schema
+contract updates. Every PR MUST demonstrate adherence to the principles above, including performance
+impact assessment for hot paths and verification that security safeguards remain intact. Adding new
+countries or providers requires interface-level design documentation, migration notes, and backward
+compatibility validation. Release artifacts MUST update the OpenAPI spec and runtime documentation
+in lockstep with code changes.
 
 ## Governance
 <!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes other practices for the address validation API. Amendments require a
+documented rationale, version bump, and review approval; breaking shifts in principles require a
+MAJOR version change, new/expanded guidance a MINOR, and clarifications a PATCH. All feature plans,
+specs, and PR reviews MUST include a Constitution Check confirming compliance with principles,
+including tests, security controls, transparency of outcomes, and performance budgets. Compliance is
+reviewed at each release; deviations demand explicit risk acceptance and remediation plans.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+**Version**: 1.0.0 | **Ratified**: 2024-12-06 | **Last Amended**: 2024-12-06
 <!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->

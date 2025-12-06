@@ -31,7 +31,18 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Validate `/validate-address` contract: structured fields (`street`, `number`, `city`, `state`,
+  `zip_code`, `validation_status`, `confidence`, `reason`) and status semantics (valid, corrected,
+  unverifiable) upheld.
+- Ensure parsing/normalization rules target USPS-compliant output; unclear fields marked instead of
+  guessed.
+- Confirm graceful degradation: best-effort responses without hard failures; corrections are
+  explicitly noted.
+- Security review: input sanitization, no stack traces in responses, rate limiting/abuse protections
+  defined.
+- Performance target documented (e.g., sub-200ms p95 under expected load) with measurement plan.
+- Test plan covers unit + integration edge cases, contract tests for the endpoint, and updates the
+  OpenAPI spec alongside code.
 
 ## Project Structure
 

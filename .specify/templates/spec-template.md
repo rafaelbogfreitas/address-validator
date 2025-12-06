@@ -5,6 +5,11 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+> Constitution alignment: capture the `/validate-address` contract fields (street, number, city,
+> state, zip_code, validation_status, confidence, reason), USPS-compliant normalization rules,
+> graceful degradation behavior, security controls (sanitization, no stack traces), performance
+> targets, and test expectations when relevant to the feature.
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
