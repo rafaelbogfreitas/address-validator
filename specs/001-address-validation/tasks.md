@@ -45,16 +45,16 @@ edge cases, and error handling as required by the constitution.
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
-- [ ] T010 Scaffold Express bootstrap (src/server.ts, src/app.ts) with JSON body parsing, helmet, cors allowlist placeholder, morgan (dev), base `/v1` router mount, graceful shutdown
-- [ ] T011 Add rate limiting middleware and configuration (src/middlewares/rate-limit.ts) targeting ~60 req/min/IP for /v1/validate-address
-- [ ] T012 Implement RFC 7807 error/404 handling without stack traces (src/middlewares/error-handler.ts, src/lib/problem.ts)
-- [ ] T013 Implement config loader/validator for env settings (src/config/index.ts) with defaults and production fail-fast
-- [ ] T014 Add request ID middleware and logger wiring (src/middlewares/request-id.ts, src/lib/logger.ts) with concise prod logging
-- [ ] T015 Define validation contracts and types (statuses, confidence, corrections) (src/validation/validator.ts)
-- [ ] T016 Stub heuristic validator and USPS normalization helpers (src/validation/heuristic.ts) plus barrel export (src/validation/index.ts)
-- [ ] T017 Define zod schemas for request/response and problem details (src/schemas/address.ts) including OpenAPI metadata
-- [ ] T018 Wire base router and controller placeholders for /v1/validate-address (src/routes/validate.ts, src/controllers/validate-controller.ts)
-- [ ] T019 Seed test fixtures for addresses and abbreviations (tests/fixtures/addresses.json)
+- [X] T010 Scaffold Express bootstrap (src/server.ts, src/app.ts) with JSON body parsing, helmet, cors allowlist placeholder, morgan (dev), base `/v1` router mount, graceful shutdown
+- [X] T011 Add rate limiting middleware and configuration (src/middlewares/rate-limit.ts) targeting ~60 req/min/IP for /v1/validate-address
+- [X] T012 Implement RFC 7807 error/404 handling without stack traces (src/middlewares/error-handler.ts, src/lib/problem.ts)
+- [X] T013 Implement config loader/validator for env settings (src/config/index.ts) with defaults and production fail-fast
+- [X] T014 Add request ID middleware and logger wiring (src/middlewares/request-id.ts, src/lib/logger.ts) with concise prod logging
+- [X] T015 Define validation contracts and types (statuses, confidence, corrections) (src/validation/validator.ts)
+- [X] T016 Stub heuristic validator and USPS normalization helpers (src/validation/heuristic.ts) plus barrel export (src/validation/index.ts)
+- [X] T017 Define zod schemas for request/response and problem details (src/schemas/address.ts) including OpenAPI metadata
+- [X] T018 Wire base router and controller placeholders for /v1/validate-address (src/routes/validate.ts, src/controllers/validate-controller.ts)
+- [X] T019 Seed test fixtures for addresses and abbreviations (tests/fixtures/addresses.json)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
