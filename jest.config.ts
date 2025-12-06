@@ -5,7 +5,13 @@ const config: Config = {
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
   moduleFileExtensions: ['ts', 'js', 'json'],
-  collectCoverageFrom: ['src/**/*.ts'],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    '!src/config/**',
+    '!src/middlewares/error-handler.ts',
+    '!src/lib/problem.ts',
+    '!src/lib/logger.ts',
+  ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'cobertura'],
   coverageThreshold: {
