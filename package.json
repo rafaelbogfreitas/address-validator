@@ -12,7 +12,7 @@
     "format:fix": "prettier --write .",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
-    "coverage": "jest --coverage",
+    "coverage": "jest --coverage --passWithNoTests",
     "typecheck": "tsc --noEmit",
     "docs": "tsx scripts/generate-openapi.ts",
     "prepare": "husky install"
