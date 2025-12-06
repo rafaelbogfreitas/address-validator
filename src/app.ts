@@ -11,6 +11,7 @@ import {
   addressResponseUnionSchema,
   addressRequestSchema,
 } from './schemas/address';
+import { openApiDocument } from './openapi/doc';
 
 export const createApp = () => {
   const app = express();
@@ -45,6 +46,10 @@ export const createApp = () => {
       request: requestSchema ?? addressRequestSchema,
       response: responseSchema ?? addressResponseUnionSchema,
     });
+  });
+
+  app.get('/docs', (_req, res) => {
+    res.json(openApiDocument);
   });
 
   app.use(notFoundHandler);
