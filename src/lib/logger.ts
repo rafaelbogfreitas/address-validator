@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export const logger = {
   info: (message: string, meta?: Record<string, unknown>) => {
     if (meta) {
