@@ -22,4 +22,17 @@ describe('HeuristicValidator', () => {
     expect(result.validation_status).toBe('valid');
     expect(result.confidence).toBe(1);
   });
+
+  it('normalizes directionals, suffixes, and state casing', async () => {
+    const result = await heuristicValidator.validate({
+      address: '500 n main street, portland, or 97201',
+    });
+
+    expect(result.validation_status).toBe('corrected');
+    expect(result.street).toBe('N Main St');
+    expect(result.number).toBe('500');
+    expect(result.city).toBe('Portland');
+    expect(result.state).toBe('OR');
+    expect(result.zip_code).toBe('97201');
+  });
 });
