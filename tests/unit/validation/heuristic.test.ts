@@ -35,4 +35,14 @@ describe('HeuristicValidator', () => {
     expect(result.state).toBe('OR');
     expect(result.zip_code).toBe('97201');
   });
+
+  it('normalizes suffix with punctuation', async () => {
+    const result = await heuristicValidator.validate({
+      address: '42 elm ave., springfield, il 62704',
+    });
+
+    expect(result.street).toContain('Ave');
+    expect(result.zip_code).toBe('62704');
+    expect(result.validation_status).toBe('corrected');
+  });
 });
