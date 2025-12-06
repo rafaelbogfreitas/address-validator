@@ -16,6 +16,9 @@ export const validateAddress = async (
     const response = addressResponseSchema.parse(result);
     res.json(response);
   } catch (err) {
+    if (err instanceof Error && 'errors' in (err as never)) {
+      (err as Error & { status?: number }).status = 400;
+    }
     next(err);
   }
 };

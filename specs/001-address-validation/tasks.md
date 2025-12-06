@@ -68,15 +68,15 @@ edge cases, and error handling as required by the constitution.
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T020 [P] [US1] Unit tests for normalization/heuristic happy paths and typo corrections (tests/unit/validation/heuristic.test.ts)
-- [ ] T021 [P] [US1] Integration tests for `/v1/validate-address` valid/corrected responses (tests/integration/validate-address.corrected.test.ts)
+- [X] T020 [P] [US1] Unit tests for normalization/heuristic happy paths and typo corrections (tests/unit/validation/heuristic.test.ts)
+- [X] T021 [P] [US1] Integration tests for `/v1/validate-address` valid/corrected responses (tests/integration/validate-address.corrected.test.ts)
 
 ### Implementation for User Story 1
 
-- [ ] T022 [P] [US1] Implement USPS normalization helpers (directionals, suffixes, casing) (src/validation/heuristic.ts)
-- [ ] T023 [US1] Implement heuristic validator for valid/corrected outcomes with corrections list (src/validation/heuristic.ts, src/validation/index.ts)
+- [X] T022 [P] [US1] Implement USPS normalization helpers (directionals, suffixes, casing) (src/validation/heuristic.ts)
+- [X] T023 [US1] Implement heuristic validator for valid/corrected outcomes with corrections list (src/validation/heuristic.ts, src/validation/index.ts)
 - [ ] T024 [US1] Finalize zod response schemas for valid/corrected cases and union types (src/schemas/address.ts)
-- [ ] T025 [US1] Implement controller/service flow for `/v1/validate-address` returning normalized output (src/controllers/validate-controller.ts, src/routes/validate.ts)
+- [X] T025 [US1] Implement controller/service flow for `/v1/validate-address` returning normalized output (src/controllers/validate-controller.ts, src/routes/validate.ts)
 - [ ] T026 [US1] Wire OpenAPI generation inputs for endpoint schemas (src/app.ts, src/schemas/address.ts)
 
 **Checkpoint**: User Story 1 independently testable (valid/corrected paths)
