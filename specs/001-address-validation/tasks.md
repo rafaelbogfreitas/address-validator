@@ -75,7 +75,7 @@ edge cases, and error handling as required by the constitution.
 
 - [X] T022 [P] [US1] Implement USPS normalization helpers (directionals, suffixes, casing) (src/validation/heuristic.ts)
 - [X] T023 [US1] Implement heuristic validator for valid/corrected outcomes with corrections list (src/validation/heuristic.ts, src/validation/index.ts)
-- [ ] T024 [US1] Finalize zod response schemas for valid/corrected cases and union types (src/schemas/address.ts)
+- [X] T024 [US1] Finalize zod response schemas for valid/corrected cases and union types (src/schemas/address.ts)
 - [X] T025 [US1] Implement controller/service flow for `/v1/validate-address` returning normalized output (src/controllers/validate-controller.ts, src/routes/validate.ts)
 - [ ] T026 [US1] Wire OpenAPI generation inputs for endpoint schemas (src/app.ts, src/schemas/address.ts)
 

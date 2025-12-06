@@ -7,6 +7,10 @@ import { config } from './config';
 import { validateRouter } from './routes/validate';
 import { notFoundHandler, errorHandler } from './middlewares/error-handler';
 import { requestIdMiddleware } from './middlewares/request-id';
+import {
+  addressResponseUnionSchema,
+  addressRequestSchema,
+} from './schemas/address';
 
 export const createApp = () => {
   const app = express();
@@ -29,6 +33,19 @@ export const createApp = () => {
   );
 
   app.use('/v1', validateRouter);
+
+  app.get('/docs/schema', (_req, res) => {
+    const requestSchema = (
+      addressRequestSchema as unknown as { openapi?: unknown }
+    ).openapi;
+    const responseSchema = (
+      addressResponseUnionSchema as unknown as { openapi?: unknown }
+    ).openapi;
+    res.json({
+      request: requestSchema ?? addressRequestSchema,
+      response: responseSchema ?? addressResponseUnionSchema,
+    });
+  });
 
   app.use(notFoundHandler);
   app.use(errorHandler);
