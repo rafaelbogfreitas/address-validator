@@ -80,6 +80,8 @@ npm run docs         # generate OpenAPI (writes public/openapi.json)
 - `src/middlewares/`: rate limiting, request ID, RFC 7807 error handling
 - `src/schemas/`: zod request/response schemas for address validation
 - `src/validation/`: validator interface, heuristic validator, and Geocodio provider adapter
+- `src/services/CacheService.ts`: normalized in-memory cache used by the validation controller to avoid
+  repeat validations for the same address input
 - `src/controllers/`, `src/routes/`: `/v1/validate-address` controller/route
 - `tests/fixtures/`: address fixtures for upcoming tests
 
