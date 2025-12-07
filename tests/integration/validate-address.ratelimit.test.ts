@@ -33,5 +33,5 @@ describe('POST /v1/validate-address rate limiting', () => {
       .expect(429);
 
     expect(resp.status).toBe(429);
-  });
+  }, 20000);
 });

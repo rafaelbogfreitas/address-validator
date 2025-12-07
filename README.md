@@ -33,6 +33,7 @@ Project standards, best practices, and guidance for AI/automation agents are kep
 
 - Commit message standard: `.docs/commit-messages.md`
 - PR title/description standard: `.docs/pr-standards.md`
+- Branch naming standard: `.docs/branch-naming.md`
 - Additional standards will be added here to bound agent behavior and maintain consistency.
 
 ### API Docs
