@@ -30,7 +30,9 @@ Check passes before proceeding with design or implementation.
 ## Documentation (.docs)
 
 Project standards, best practices, and guidance for AI/automation agents are kept in `.docs/`.
+
 - Commit message standard: `.docs/commit-messages.md`
+- PR title/description standard: `.docs/pr-standards.md`
 - Additional standards will be added here to bound agent behavior and maintain consistency.
 
 ### API Docs
