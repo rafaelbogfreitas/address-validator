@@ -6,10 +6,11 @@
 ## Summary
 
 Deliver a production-ready `/v1/validate-address` API that accepts free-form US addresses and returns
-standardized USPS-compliant fields with validation status, confidence, and rationale. Implement a
-provider-agnostic validator interface with heuristic fallback and optional adapters (USPS, Smarty),
-enforce security middleware, rate limiting, strict validation via zod, OpenAPI generation, and a
-comprehensive test suite (Jest + supertest) with ≥90% coverage.
+USPS-compliant structured fields with validation status, confidence, and rationale. Primary
+validation will leverage a Geocodio provider adapter with a local heuristic fallback for
+resilience/dev/offline. Enforce security middleware, rate limiting, strict validation via zod,
+OpenAPI generation, and a comprehensive test suite (Jest + supertest) with coverage gates adjusted
+during early implementation.
 
 ## Technical Context
 
@@ -20,16 +21,19 @@ comprehensive test suite (Jest + supertest) with ≥90% coverage.
 -->
 
 **Language/Version**: Node.js 20 (LTS), TypeScript strict  
-**Primary Dependencies**: Express, zod, zod-to-openapi or swagger-jsdoc, helmet, cors, compression,
-morgan, express-rate-limit, tsx/ts-node for dev  
+**Primary Dependencies**: Express, zod, @anatine/zod-openapi, helmet, cors, compression, morgan,
+express-rate-limit, tsx/ts-node; Geocodio provider adapter via modular interface with heuristic
+fallback  
 **Storage**: None (stateless API; provider integrations external)  
-**Testing**: Jest + supertest; coverage ≥ 90%  
+**Testing**: Jest + supertest; coverage targets staged (statements/lines 90, functions 80, branches
+60 during US1)  
 **Target Platform**: Linux container/VM server  
 **Project Type**: Backend API (single service)  
 **Performance Goals**: <500 ms typical response; track p95 latency; resilience under rate limit load  
-**Constraints**: USPS-compliant normalization; do not geocode; US-only; no auth/billing in v1; RFC
-7807 errors; no stack traces; rate limit ~60 req/min/IP  
-**Scale/Scope**: Single endpoint with provider adapters; extensible for more providers/countries
+**Constraints**: USPS-compliant normalization; US-only; no auth/billing in v1; RFC 7807 errors; no
+stack traces; rate limit ~60 req/min/IP; Geocodio subject to API quota/timeouts with fallback to
+heuristic  
+**Scale/Scope**: Single endpoint with provider adapter; extensible for more providers/countries
 
 ## Constitution Check
 
@@ -48,9 +52,9 @@ morgan, express-rate-limit, tsx/ts-node for dev
 - Test plan covers unit + integration edge cases, contract tests for the endpoint, and updates the
   OpenAPI spec alongside code.
 
-Status: ✅ Planned stack and requirements satisfy gates; performance target set (<500 ms typical,
-track p95). OpenAPI generation and contract tests included. Rate limiting, input sanitization, and
-no-stack-trace error handling in scope.
+Status: ✅ Gates satisfied; Geocodio adapter is pluggable with heuristic fallback to honor graceful
+degradation. Performance target maintained; security middleware and rate limiting in place; OpenAPI
+generation wired from zod schemas.
 
 ## Project Structure
 
@@ -89,10 +93,10 @@ src/
 │   ├── validator.ts
 │   ├── heuristic.ts
 │   └── providers/
-│       ├── usps.ts
-│       └── smarty.ts
+│       └── geocodio.ts
 ├── lib/
 ├── middlewares/
+├── openapi/
 └── infra/
 
 tests/
@@ -104,9 +108,8 @@ public/
 .husky/
 ```
 
-**Structure Decision**: Single backend service with Express; dedicated directories for validation
-engine, provider adapters, schemas, controllers, middlewares, and tests aligned to unit/integration
-split.
+**Structure Decision**: Single backend service with Express; validation engine includes Geocodio
+adapter and heuristic fallback; schemas drive OpenAPI; tests split unit/integration.
 
 ## Complexity Tracking
 

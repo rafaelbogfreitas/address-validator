@@ -6,13 +6,13 @@
 
 ## Provider Strategy
 
-- **Decision**: Implement a provider-agnostic `Validator` interface with adapters for USPS, Smarty,
-  and a default heuristic/local parser for offline/dev. Start with heuristic as default; enable
-  provider via config flag.
-- **Rationale**: Maintains extensibility and failover while keeping v1 deliverable without external
-  dependency availability.
-- **Alternatives considered**: Single-provider hard dependency (simpler but brittle, harder to test
-  offline); delaying provider abstraction (would block adding USPS/Smarty without refactor).
+- **Decision**: Implement a provider-agnostic `Validator` interface with a Geocodio adapter and a
+  default heuristic/local parser for offline/dev. Start with Geocodio when configured; fallback to
+  heuristic on failure or when disabled via config flag.
+- **Rationale**: Geocodio offers US address parsing/standardization with reasonable quotas and clear
+  API; abstraction keeps extensibility and failover while keeping v1 deliverable.
+- **Alternatives considered**: USPS Web Tools/Smarty (require separate credentials, quotas, and
+  potentially stricter TOS); delaying provider abstraction (would block adding other providers later).
 
 ## Normalization Rules
 

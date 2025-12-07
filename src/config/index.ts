@@ -5,10 +5,8 @@ const envSchema = z.object({
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
-  ENABLE_PROVIDER: z.enum(['usps', 'smarty', 'none']).default('none'),
-  USPS_API_KEY: z.string().optional(),
-  SMARTY_AUTH_ID: z.string().optional(),
-  SMARTY_AUTH_TOKEN: z.string().optional(),
+  ENABLE_PROVIDER: z.enum(['geocodio', 'none']).default('none'),
+  GEOCODIO_API_KEY: z.string().optional(),
   RATE_LIMIT_WINDOW: z.coerce.number().int().positive().default(60_000),
   RATE_LIMIT_MAX: z.coerce.number().int().positive().default(60),
 });

@@ -3,7 +3,7 @@ import {
   addressRequestSchema,
   addressResponseSchema,
 } from '../schemas/address';
-import { heuristicValidator } from '../validation';
+import { getValidator } from '../validation';
 
 export const validateAddress = async (
   req: Request,
@@ -12,7 +12,8 @@ export const validateAddress = async (
 ) => {
   try {
     const parsed = addressRequestSchema.parse(req.body);
-    const result = await heuristicValidator.validate(parsed);
+    const validator = getValidator();
+    const result = await validator.validate(parsed);
     const response = addressResponseSchema.parse(result);
     res.json(response);
   } catch (err) {

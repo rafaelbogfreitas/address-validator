@@ -70,6 +70,7 @@ edge cases, and error handling as required by the constitution.
 
 - [X] T020 [P] [US1] Unit tests for normalization/heuristic happy paths and typo corrections (tests/unit/validation/heuristic.test.ts)
 - [X] T021 [P] [US1] Integration tests for `/v1/validate-address` valid/corrected responses (tests/integration/validate-address.corrected.test.ts)
+- [ ] T041 [P] [US1] Integration tests for provider success and heuristic fallback (tests/integration/validate-address.provider.test.ts)
 
 ### Implementation for User Story 1
 
@@ -77,7 +78,9 @@ edge cases, and error handling as required by the constitution.
 - [X] T023 [US1] Implement heuristic validator for valid/corrected outcomes with corrections list (src/validation/heuristic.ts, src/validation/index.ts)
 - [X] T024 [US1] Finalize zod response schemas for valid/corrected cases and union types (src/schemas/address.ts)
 - [X] T025 [US1] Implement controller/service flow for `/v1/validate-address` returning normalized output (src/controllers/validate-controller.ts, src/routes/validate.ts)
-- [ ] T026 [US1] Wire OpenAPI generation inputs for endpoint schemas (src/app.ts, src/schemas/address.ts)
+- [X] T026 [US1] Wire OpenAPI generation inputs for endpoint schemas (src/app.ts, src/schemas/address.ts)
+- [ ] T042 [P] [US1] Implement provider interface wiring with selection (Geocodio or heuristic) (src/validation/index.ts, src/validation/validator.ts, src/config/index.ts)
+- [ ] T043 [US1] Implement Geocodio provider adapter using config/env and HTTP client (src/validation/providers/geocodio.ts)
 
 **Checkpoint**: User Story 1 independently testable (valid/corrected paths)
 
