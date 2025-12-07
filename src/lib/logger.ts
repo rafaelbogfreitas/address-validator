@@ -24,4 +24,12 @@ export const logger = {
       console.warn(message);
     }
   },
+  debug: (message: string, meta?: Record<string, unknown>) => {
+    if (process.env.NODE_ENV !== 'development') return;
+    if (meta) {
+      console.debug(message, meta);
+    } else {
+      console.debug(message);
+    }
+  },
 };

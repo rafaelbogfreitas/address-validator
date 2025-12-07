@@ -120,7 +120,7 @@ edge cases, and error handling as required by the constitution.
 ### Implementation for User Story 3
 
 - [X] T033 [US3] Implement confidence scoring and corrections/message enrichment in validator outputs (src/validation/index.ts, src/validation/heuristic.ts)
-- [ ] T034 [US3] Harden RFC 7807 error responses and logging without stack traces (src/middlewares/error-handler.ts, src/lib/logger.ts)
+- [X] T034 [US3] Harden RFC 7807 error responses and logging without stack traces (src/middlewares/error-handler.ts, src/lib/logger.ts)
 - [X] T035 [US3] Generate and serve OpenAPI at `/docs` (docs script + static hosting) (src/app.ts, package.json scripts, public/openapi.json)
 
 **Checkpoint**: User Story 3 independently testable (transparency and error consistency)
