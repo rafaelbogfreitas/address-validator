@@ -1,11 +1,22 @@
 import request from 'supertest';
-import { createApp } from '../../src/app';
 import type { AddressResponse } from '../../src/schemas/address';
 
-const app = createApp();
+const originalEnv = process.env;
 
 describe('POST /v1/validate-address corrected flow', () => {
+  beforeEach(() => {
+    process.env = { ...originalEnv, ENABLE_PROVIDER: 'none' };
+    jest.resetModules();
+  });
+
+  afterEach(() => {
+    process.env = originalEnv;
+    jest.restoreAllMocks();
+  });
+
   it('returns corrected address with rationale', async () => {
+    const { createApp } = await import('../../src/app');
+    const app = createApp();
     const response = await request(app)
       .post('/v1/validate-address')
       .send({ address: '1600 pennslyvnia ave, washngton, dc 20500' })
