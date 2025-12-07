@@ -12,6 +12,8 @@ with validation status, confidence, and reasoning. This README will expand as th
 - Endpoint (v1): `POST /v1/validate-address` (uses Geocodio provider when enabled, heuristic
   fallback otherwise)
 - OpenAPI: generated from zod schemas and served at `/docs`; schema preview at `/docs/schema`
+- Confidence & transparency: responses include `validation_status`, `confidence`, `message`, and any
+  corrections; unverifiable flows handled gracefully with reasons.
 
 ## Using Speckit
 
@@ -75,7 +77,7 @@ npm run docs         # generate OpenAPI (writes public/openapi.json)
 - `src/config/`: zod-validated environment loader
 - `src/middlewares/`: rate limiting, request ID, RFC 7807 error handling
 - `src/schemas/`: zod request/response schemas for address validation
-- `src/validation/`: validator interface and heuristic fallback (to be expanded)
+- `src/validation/`: validator interface, heuristic validator, and Geocodio provider adapter
 - `src/controllers/`, `src/routes/`: `/v1/validate-address` controller/route
 - `tests/fixtures/`: address fixtures for upcoming tests
 
