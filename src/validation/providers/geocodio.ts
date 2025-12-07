@@ -43,7 +43,7 @@ export class GeocodioProvider implements Validator {
   constructor(private readonly apiKey: string) {}
 
   async validate(input: AddressRequest): Promise<AddressResponse> {
-    const url = new URL('https://api.geocod.io/v1.7/normalize');
+    const url = new URL('https://api.geocod.io/v1.9/geocode');
     url.searchParams.set('api_key', this.apiKey);
     url.searchParams.set('q', input.address);
 

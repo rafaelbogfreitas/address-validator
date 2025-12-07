@@ -10,5 +10,6 @@ export const getValidator = (): Validator => {
   if (config.ENABLE_PROVIDER === 'geocodio' && geocodioProvider) {
     return geocodioProvider;
   }
+
   return heuristicValidator;
 };

@@ -1,4 +1,10 @@
+import { config as loadEnv } from 'dotenv';
 import { z } from 'zod';
+
+// Load environment variables from .env before validation.
+loadEnv({
+  path: process.env.DOTENV_CONFIG_PATH,
+});
 
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3000),
