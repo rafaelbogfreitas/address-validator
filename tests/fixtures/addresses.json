@@ -1,0 +1,7 @@
+{
+  "valid": "1600 Pennsylvania Ave NW, Washington, DC 20500",
+  "typo": "1600 pennslyvnia ave, washngton",
+  "missingZip": "350 Fifth Ave, New York, NY",
+  "ambiguous": "123 Main St, Springfield",
+  "nonUs": "10 Downing St, London"
+}
