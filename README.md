@@ -30,6 +30,12 @@ Project standards, best practices, and guidance for AI/automation agents are kep
 - Commit message standard: `.docs/commit-messages.md`
 - Additional standards will be added here to bound agent behavior and maintain consistency.
 
+### API Docs
+
+- OpenAPI JSON is served at `/docs` (runtime) and schema preview at `/docs/schema`.
+- Generate local artifact: `npm run docs` (writes `public/openapi.json`).
+- Contract: `POST /v1/validate-address` (request/response driven from zod schemas).
+
 ## Development
 
 ### Prerequisites
@@ -56,7 +62,7 @@ npm run format:fix   # prettier --write .
 npm test             # jest --passWithNoTests
 npm run coverage     # jest --coverage --passWithNoTests
 npm run typecheck    # tsc --noEmit
-npm run docs         # generate OpenAPI (script TODO)
+npm run docs         # generate OpenAPI (writes public/openapi.json)
 ```
 
 ### Current Architecture
