@@ -9,8 +9,9 @@ with validation status, confidence, and reasoning. This README will expand as th
 - Stack: Node.js 20, TypeScript (strict), Express, zod, @anatine/zod-openapi, helmet, cors,
   compression, morgan, express-rate-limit, Jest + ts-jest + supertest, ESLint/Prettier, Husky,
   lint-staged, commitlint.
-- Endpoint (v1): `POST /v1/validate-address` (in development; heuristic fallback stubbed)
-- OpenAPI: generated from zod schemas (script pending implementation) and served at `/docs`
+- Endpoint (v1): `POST /v1/validate-address` (uses Geocodio provider when enabled, heuristic
+  fallback otherwise)
+- OpenAPI: generated from zod schemas and served at `/docs`; schema preview at `/docs/schema`
 
 ## Using Speckit
 
@@ -35,6 +36,8 @@ Project standards, best practices, and guidance for AI/automation agents are kep
 - OpenAPI JSON is served at `/docs` (runtime) and schema preview at `/docs/schema`.
 - Generate local artifact: `npm run docs` (writes `public/openapi.json`).
 - Contract: `POST /v1/validate-address` (request/response driven from zod schemas).
+- Provider selection: set `ENABLE_PROVIDER=geocodio` and `GEOCODIO_API_KEY` in `.env`; set
+  `ENABLE_PROVIDER=none` to force heuristic fallback.
 
 ## Development
 
