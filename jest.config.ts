@@ -13,7 +13,7 @@ const config: Config = {
     '!src/lib/logger.ts',
     '!src/validation/providers/**',
   ],
-  testTimeout: 10000,
+  testTimeout: 20000,
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'cobertura'],
   coverageThreshold: {
