@@ -115,13 +115,13 @@ edge cases, and error handling as required by the constitution.
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T032 [P] [US3] Integration tests verifying status/confidence/message across valid/corrected/unverifiable (tests/integration/validate-address.transparency.test.ts)
+- [X] T032 [P] [US3] Integration tests verifying status/confidence/message across valid/corrected/unverifiable (tests/integration/validate-address.transparency.test.ts)
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Implement confidence scoring and corrections/message enrichment in validator outputs (src/validation/index.ts, src/validation/heuristic.ts)
+- [X] T033 [US3] Implement confidence scoring and corrections/message enrichment in validator outputs (src/validation/index.ts, src/validation/heuristic.ts)
 - [ ] T034 [US3] Harden RFC 7807 error responses and logging without stack traces (src/middlewares/error-handler.ts, src/lib/logger.ts)
-- [ ] T035 [US3] Generate and serve OpenAPI at `/docs` (docs script + static hosting) (src/app.ts, package.json scripts, public/openapi.json)
+- [X] T035 [US3] Generate and serve OpenAPI at `/docs` (docs script + static hosting) (src/app.ts, package.json scripts, public/openapi.json)
 
 **Checkpoint**: User Story 3 independently testable (transparency and error consistency)
 

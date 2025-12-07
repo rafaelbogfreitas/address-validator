@@ -16,4 +16,12 @@ export const logger = {
       console.error(message);
     }
   },
+  warn: (message: string, meta?: Record<string, unknown>) => {
+    if (process.env.NODE_ENV === 'test') return;
+    if (meta) {
+      console.warn(message, meta);
+    } else {
+      console.warn(message);
+    }
+  },
 };

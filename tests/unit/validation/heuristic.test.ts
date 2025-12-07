@@ -20,7 +20,7 @@ describe('HeuristicValidator', () => {
     });
 
     expect(result.validation_status).toBe('valid');
-    expect(result.confidence).toBe(1);
+    expect(result.confidence).toBeGreaterThanOrEqual(0.95);
   });
 
   it('normalizes directionals, suffixes, and state casing', async () => {

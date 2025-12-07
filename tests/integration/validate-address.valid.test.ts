@@ -28,6 +28,6 @@ describe('POST /v1/validate-address valid flow', () => {
     expect(body.city).toBe('Washington');
     expect(body.state).toBe('DC');
     expect(body.zip_code).toBe('20500');
-    expect(body.confidence).toBe(1);
+    expect(body.confidence).toBeGreaterThanOrEqual(0.95);
   });
 });

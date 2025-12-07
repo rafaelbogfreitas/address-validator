@@ -191,11 +191,14 @@ export class HeuristicValidator implements Validator {
     if (isValid) {
       normalized.validation_status = 'valid';
       normalized.message = 'Address validated';
-      normalized.confidence = 1;
+      normalized.confidence = 0.95;
     } else {
       normalized.validation_status = 'corrected';
       normalized.message = corrections.join('; ') || 'Corrections applied';
-      normalized.confidence = 0.9;
+      normalized.confidence = Math.max(
+        0.7,
+        Math.min(0.95, 1 - corrections.length * 0.05),
+      );
     }
 
     return Promise.resolve(normalized);
