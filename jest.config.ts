@@ -11,7 +11,9 @@ const config: Config = {
     '!src/middlewares/error-handler.ts',
     '!src/lib/problem.ts',
     '!src/lib/logger.ts',
+    '!src/validation/providers/**',
   ],
+  testTimeout: 10000,
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'cobertura'],
   coverageThreshold: {

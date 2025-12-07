@@ -143,6 +143,37 @@ export class HeuristicValidator implements Validator {
       ...(stateZipNormalized.corrections ?? []),
     ];
 
+    const nonUsCues =
+      /\b(canada|uk|united kingdom|england|london|toronto|australia|paris|france|province)\b/i.test(
+        input.address,
+      ) || /[A-Za-z]\d[A-Za-z]\s?\d[A-Za-z]\d/.test(input.address);
+    const missingRequired =
+      !cityNormalized.city ||
+      !stateZipNormalized.state ||
+      !stateZipNormalized.zip;
+    const invalidZip =
+      stateZipNormalized.zip !== null &&
+      typeof stateZipNormalized.zip === 'string' &&
+      !/^\d{5}$/.test(stateZipNormalized.zip);
+
+    if (nonUsCues || missingRequired || invalidZip) {
+      return Promise.resolve({
+        street: streetNormalized.street,
+        number: streetNormalized.number,
+        city: cityNormalized.city,
+        state: stateZipNormalized.state,
+        zip_code: stateZipNormalized.zip,
+        validation_status: 'unverifiable',
+        confidence: 0.3,
+        message: nonUsCues
+          ? 'Input appears non-US; unable to verify'
+          : invalidZip
+            ? 'ZIP code is invalid format'
+            : 'Missing required components (city/state/ZIP)',
+        corrections,
+      });
+    }
+
     const normalized: AddressResponse = {
       street: streetNormalized.street,
       number: streetNormalized.number,

@@ -94,14 +94,14 @@ edge cases, and error handling as required by the constitution.
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T027 [P] [US2] Unit tests for unverifiable scenarios (missing ZIP, conflicting locality, non-US cues) (tests/unit/validation/heuristic-unverifiable.test.ts)
-- [ ] T028 [P] [US2] Integration tests for `/v1/validate-address` unverifiable responses (tests/integration/validate-address.unverifiable.test.ts)
-- [ ] T029 [P] [US2] Integration test for rate limiting on `/v1/validate-address` (tests/integration/validate-address.ratelimit.test.ts)
+- [X] T027 [P] [US2] Unit tests for unverifiable scenarios (missing ZIP, conflicting locality, non-US cues) (tests/unit/validation/heuristic-unverifiable.test.ts)
+- [X] T028 [P] [US2] Integration tests for `/v1/validate-address` unverifiable responses (tests/integration/validate-address.unverifiable.test.ts)
+- [X] T029 [P] [US2] Integration test for rate limiting on `/v1/validate-address` (tests/integration/validate-address.ratelimit.test.ts)
 
 ### Implementation for User Story 2
 
-- [ ] T030 [US2] Extend heuristic to detect ambiguous/incomplete/non-US inputs and return `unverifiable` with partial fields (src/validation/heuristic.ts)
-- [ ] T031 [US2] Ensure controller/schema support partial fields and reasons for unverifiable outcomes (src/controllers/validate-controller.ts, src/schemas/address.ts)
+- [X] T030 [US2] Extend heuristic to detect ambiguous/incomplete/non-US inputs and return `unverifiable` with partial fields (src/validation/heuristic.ts)
+- [X] T031 [US2] Ensure controller/schema support partial fields and reasons for unverifiable outcomes (src/controllers/validate-controller.ts, src/schemas/address.ts)
 
 **Checkpoint**: User Story 2 independently testable (unverifiable flows and rate limiting)
 
